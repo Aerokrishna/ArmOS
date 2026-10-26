@@ -1,0 +1,35 @@
+# armos_control admittance_controller parameters: one file for the real FR3 and the sim.
+# The sim bridge emulates the robot's topics and crisp's Cartesian impedance, so the same values apply;
+# change one here, not per backend. Lists of numbers must be floats. Defaults in the node are the same.
+
+/**/admittance_controller:
+  ros__parameters:
+    axes: tcp                    # tcp | base: frame of control_mode, target_wrench, spring / damper
+    control_rate_hz: 250.0
+    base_frame: base
+    tcp_frame: auto              # auto: crisp pose_broadcaster's end_effector_frame (the sim launch sets it)
+
+    wrench:
+      sign: 1.0                  # +1: input is robot-on-environment (check on the robot, see the node doc)
+      tare_samples: 500          # 2 s at 250 Hz, robot still and untouched
+      tare_max_std: [1.0, 0.15]  # N, Nm: above -> tare restarts
+      filter_hz: 15.0
+      force_deadband: [0.5, 0.05]  # N, Nm on the wrench error (estimate drift)
+      timeout: 0.1               # s
+
+    # Virtual dynamics [x, y, z, rx, ry, rz]
+    mass: [2.5, 2.5, 2.5, 0.25, 0.25, 0.25]
+    stiffness: [1000.0, 1000.0, 1000.0, 10.0, 10.0, 10.0]
+    damping: [100.0, 100.0, 100.0, 3.0, 3.0, 3.0]
+    damping_force: [100.0, 100.0, 100.0, 5.0, 5.0, 5.0]   # force axes: approach speed F / D_force
+
+    limits:
+      max_vel: [0.05, 0.25]          # m/s, rad/s
+      max_acc: [1.0, 1.0]            # pose axes, m/s^2, rad/s^2
+      max_force_vel: [0.05, 0.3]     # force axes, m/s, rad/s
+      max_wrench: [20.0, 3.0]        # N, Nm (target wrench norm)
+      max_deviation: [0.05, 0.3]     # m, rad: virtual pose lead over the measured pose
+
+    pose_timeout: 0.1                # s, stale pose -> hold
+    force_target_timeout: 1.0        # s without target_wrench while a force axis is active -> pose mode
+    initial_control_mode: [1, 1, 1, 1, 1, 1]

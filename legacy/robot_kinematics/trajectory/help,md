@@ -1,0 +1,15 @@
+contains files necessary to generate 
+trajectory, joint as well as task space
+trajectories
+position, velocity, acceleration trajectory
+also for orientation interpolation
+
+will contain some general trajectory shapes, circle, linear, spline
+
+trajectory optimization in the future
+
+- joint space trajectory given acceleration, velocity limits
+- cartesian trajectory generation 1st and 2nd order trajectory
+- spline trajectory, different types of interpolation using spline
+- what do topra and traj smoother do
+  

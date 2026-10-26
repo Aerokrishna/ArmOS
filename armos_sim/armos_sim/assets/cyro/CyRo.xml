@@ -1,0 +1,317 @@
+<mujoco model="cyro">
+    <compiler angle="radian" />
+    <default>
+        <joint damping="5.0" armature="0.05" frictionloss="0.001" />
+        <geom condim="4" friction="0.8 0.02 0.001" solimp="0.9 0.95 0.001" solref="0.02 1" />
+        <motor ctrllimited="true" ctrlrange="-300 300" />
+        <position kp="200" kv="40" ctrllimited="true" ctrlrange="-3.14 3.14" />
+        </default>
+    <asset>
+        <mesh name="robots_cyro_base_base_link" content_type="model/stl" file="meshes/robots/cyro_base/robots_cyro_base_base_link.stl" />
+        <mesh name="robots_rizon4_link0" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link0.stl" />
+        <mesh name="robots_rizon4_link1" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link1.stl" />
+        <mesh name="robots_rizon4_link2" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link2.stl" />
+        <mesh name="robots_rizon4_link3" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link3.stl" />
+        <mesh name="robots_rizon4_link4" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link4.stl" />
+        <mesh name="robots_rizon4_link5" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link5.stl" />
+        <mesh name="robots_rizon4_link6" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link6.stl" />
+        <mesh name="robots_rizon4_link7" content_type="model/stl" file="meshes/robots/rizon4/robots_rizon4_link7.stl" />
+        <mesh name="CLX_Reduced_v0" content_type="model/stl" file="meshes/CLX/CLX_Reduced_v0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="robots_rizon4s_link0" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link0.stl" />
+        <mesh name="robots_rizon4s_link1" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link1.stl" />
+        <mesh name="robots_rizon4s_link2" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link2.stl" />
+        <mesh name="robots_rizon4s_link3" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link3.stl" />
+        <mesh name="robots_rizon4s_link4" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link4.stl" />
+        <mesh name="robots_rizon4s_link5" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link5.stl" />
+        <mesh name="robots_rizon4s_link6" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link6.stl" />
+        <mesh name="robots_rizon4s_link7" content_type="model/stl" file="meshes/robots/rizon4s/robots_rizon4s_link7.stl" />
+        <mesh name="grippers_dh_robotics_ag145_base_link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/grippers_dh_robotics_ag145_base_link.stl" />
+        <mesh name="crank_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/crank_Link.stl" />
+        <mesh name="rod_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/rod_Link.stl" />
+        <mesh name="proximal_phalanx_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/proximal_phalanx_Link.stl" />
+        <mesh name="distal_phalanx_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/distal_phalanx_Link.stl" />
+        </asset>
+    <worldbody>
+        <body name="base_link">
+            <inertial pos="0.285616 5.85061e-05 0.638097" quat="0.500088 0.499919 -0.499911 0.500082" mass="27.7529" diaginertia="1.05797 0.666216 0.639469" />
+            <geom pos="0 0 0" quat="0.707035 -0.707179 0 0" type="mesh" contype="1" conaffinity="1" rgba="0.792157 0.819608 0.933333 1" mesh="robots_cyro_base_base_link" />
+            <body name="center_robot_base_link" pos="0.405 0 1.115" quat="0 0 0 1">
+                <inertial pos="0 0 0.09" mass="3.7" diaginertia="0.02 0.02 0.01" />
+                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link0" />
+                <body name="center_robot_link1" pos="0 0 0.155" quat="0 0 0 -1">
+                    <inertial pos="0 0.01 0.15" mass="3.7" diaginertia="0.03 0.03 0.01" />
+                    <joint name="center_robot_joint1" pos="0 0 0" axis="0 0 1" range="-2.7925 2.7925" actuatorfrcrange="-123 123" />
+                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link1" />
+                    <body name="center_robot_link2" pos="0 0.03 0.21">
+                        <inertial pos="0 0.04 0.1" mass="2.7" diaginertia="0.02 0.02 0.01" />
+                        <joint name="center_robot_joint2" pos="0 0 0" axis="0 1 0" range="-2.2689 2.2689" actuatorfrcrange="-123 123" />
+                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link2" />
+                        <body name="center_robot_link3" pos="0 0.035 0.205">
+                            <inertial pos="-0.01 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                            <joint name="center_robot_joint3" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-64 64" />
+                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link3" />
+                            <body name="center_robot_link4" pos="-0.02 -0.03 0.19" quat="0 0 0 -1">
+                                <inertial pos="-0.01 0.03 0.1" mass="2.4" diaginertia="0.02 0.02 0.01" />
+                                <joint name="center_robot_joint4" pos="0 0 0" axis="0 1 0" range="-1.8675 2.6878" actuatorfrcrange="-64 64" />
+                                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link4" />
+                                <body name="center_robot_link5" pos="-0.02 0.025 0.195" quat="0 0 0 -1">
+                                    <inertial pos="0 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                                    <joint name="center_robot_joint5" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link5" />
+                                    <body name="center_robot_link6" pos="0 0.03 0.19">
+                                        <inertial pos="-0.01 0.06 0.07" quat="0.92388 0 0.382683 0" mass="2.1" diaginertia="0.011 0.01 0.009" />
+                                        <joint name="center_robot_joint6" pos="0 0 0" axis="0 1 0" range="-1.3963 4.5379" actuatorfrcrange="-39 39" />
+                                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link6" />
+                                        <body name="center_robot_link7" pos="-0.055 0.07 0.11" quat="0.707107 0 -0.707107 0">
+                                            <inertial pos="0 0 0.03" mass="0.8" diaginertia="0.01 0.01 0.01" />
+                                            <joint name="center_robot_joint7" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4_link7" />
+                                            <body name="center_robot_flange" pos="0 0 0.081" quat="0 0 0 -1">
+                                                <site name="ee_frame_center" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                                <body name="center_robot_clx_link" pos="0 0 0.059" quat="0 0 -0.707107 0.707107">
+                                                    <inertial pos="-2.2e-05 -7e-06 -0.051746" quat="0.999989 0.00141825 -0.000201627 0.0044558" mass="0.773" diaginertia="0.00874837 0.00785656 0.00444517" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="CLX_Reduced_v0" />
+                                                    <body name="stereo_left_mount" pos="0.05 0.0 0.0">
+                                                        <joint name="stereo_left_yaw" type="hinge" axis="0 0 1" range="-3.1416 3.1416" />
+                                                        <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.01" rgba="0.2 0.6 1 0.3" />
+                                                        <camera name="stereo_left_cam" pos="0 -0.05 0" quat="0 0 0.707107 0.707107" fovy="25" />
+                                                        </body>
+                                                    <body name="stereo_right_mount" pos="-0.05 0.0 0.0">
+                                                        <joint name="stereo_right_yaw" type="hinge" axis="0 0 1" range="-3.1416 3.1416" />
+                                                        <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.01" rgba="0.2 0.6 1 0.3" />
+                                                        <camera name="stereo_right_cam" pos="0 -0.05 0" quat="0 0 0.707107 0.707107" fovy="25" />
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            <body name="left_robot_base_link" pos="0.4 -0.27 0.915" quat="0 0 -0.382683 0.92388">
+                <inertial pos="0 0 0.09" mass="3.7" diaginertia="0.02 0.02 0.01" />
+                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link0" />
+                <body name="left_robot_link1" pos="0 0 0.155" quat="0 0 0 -1">
+                    <inertial pos="0 0.01 0.15" mass="3.7" diaginertia="0.03 0.03 0.01" />
+                    <joint name="left_robot_joint1" pos="0 0 0" axis="0 0 1" range="-2.7925 2.7925" actuatorfrcrange="-123 123" />
+                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link1" />
+                    <body name="left_robot_link2" pos="0 0.03 0.21">
+                        <inertial pos="0 0.04 0.1" mass="2.7" diaginertia="0.02 0.02 0.01" />
+                        <joint name="left_robot_joint2" pos="0 0 0" axis="0 1 0" range="-2.2689 2.2689" actuatorfrcrange="-123 123" />
+                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link2" />
+                        <body name="left_robot_link3" pos="0 0.035 0.205">
+                            <inertial pos="-0.01 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                            <joint name="left_robot_joint3" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-64 64" />
+                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link3" />
+                            <body name="left_robot_link4" pos="-0.02 -0.03 0.19" quat="0 0 0 -1">
+                                <inertial pos="-0.01 0.03 0.1" mass="2.4" diaginertia="0.02 0.02 0.01" />
+                                <joint name="left_robot_joint4" pos="0 0 0" axis="0 1 0" range="-1.8675 2.6878" actuatorfrcrange="-64 64" />
+                                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link4" />
+                                <body name="left_robot_link5" pos="-0.02 0.025 0.195" quat="0 0 0 -1">
+                                    <inertial pos="0 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                                    <joint name="left_robot_joint5" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link5" />
+                                    <body name="left_robot_link6" pos="0 0.03 0.19">
+                                        <inertial pos="-0.01 0.06 0.07" quat="0.92388 0 0.382683 0" mass="2.1" diaginertia="0.011 0.01 0.009" />
+                                        <joint name="left_robot_joint6" pos="0 0 0" axis="0 1 0" range="-1.3963 4.5379" actuatorfrcrange="-39 39" />
+                                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link6" />
+                                        <body name="left_robot_link7" pos="-0.055 0.07 0.11" quat="0.707107 0 -0.707107 0">
+                                            <inertial pos="0 0 0.05" mass="1.4" diaginertia="0.01 0.01 0.01" />
+                                            <joint name="left_robot_joint7" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link7" />
+                                            <body name="left_robot_flange" pos="0 0 0.124" quat="0 0 0 -1">
+                                                <site name="ft_frame_left" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                                <site name="ee_frame_left" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                                <body name="left_robot_gripper_base_link">
+                                                    <inertial pos="4.22096e-09 -8.66338e-05 0.00351546" quat="-0.000251376 0.707107 -0.000251376 0.707107" mass="0.0244063" diaginertia="2.02963e-05 1.55299e-05 5.1709e-06" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="grippers_dh_robotics_ag145_base_link" />
+                                                    <body name="left_robot_gripper_finger1_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                        <inertial pos="0.019413 1.0484e-09 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                        <joint name="left_robot_gripper_finger1_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" actuatorfrcrange="-1000 1000" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                        <body name="left_robot_gripper_finger1_finger_link" pos="0.036999 0 -0.00019698">
+                                                            <inertial pos="-0.012522 -9.1789e-09 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="left_robot_gripper_finger2_knuckle_link" pos="0.016 0 0.10586">
+                                                        <inertial pos="0.019413 0.00025 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                        <joint name="left_robot_gripper_finger2_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-1000 1000" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                        <body name="left_robot_gripper_finger2_finger_link" pos="0.036999 0 -0.00019698">
+                                                            <inertial pos="-0.012522 -0.00025001 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="left_robot_gripper_finger1_inner_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                        <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                        <joint name="left_robot_gripper_finger1_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-105 105" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                        <body name="left_robot_gripper_finger1_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                            <inertial pos="0.0019731 -1.4867e-09 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                            <joint name="left_robot_gripper_finger1_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-0.1 0.1" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="left_robot_gripper_finger2_inner_knuckle_link" pos="0.016 0 0.10586">
+                                                        <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                        <joint name="left_robot_gripper_finger2_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-105 105" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                        <body name="left_robot_gripper_finger2_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                            <inertial pos="0.0019731 3.1569e-10 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                            <joint name="left_robot_gripper_finger2_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-0.1 0.1" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                            </body>
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            <body name="right_robot_base_link" pos="0.4 0.27 0.915" quat="0 0 0.382683 0.92388">
+                <inertial pos="0 0 0.09" mass="3.7" diaginertia="0.02 0.02 0.01" />
+                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link0" />
+                <body name="right_robot_link1" pos="0 0 0.155" quat="0 0 0 -1">
+                    <inertial pos="0 0.01 0.15" mass="3.7" diaginertia="0.03 0.03 0.01" />
+                    <joint name="right_robot_joint1" pos="0 0 0" axis="0 0 1" range="-2.7925 2.7925" actuatorfrcrange="-123 123" />
+                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link1" />
+                    <body name="right_robot_link2" pos="0 0.03 0.21">
+                        <inertial pos="0 0.04 0.1" mass="2.7" diaginertia="0.02 0.02 0.01" />
+                        <joint name="right_robot_joint2" pos="0 0 0" axis="0 1 0" range="-2.2689 2.2689" actuatorfrcrange="-123 123" />
+                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link2" />
+                        <body name="right_robot_link3" pos="0 0.035 0.205">
+                            <inertial pos="-0.01 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                            <joint name="right_robot_joint3" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-64 64" />
+                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link3" />
+                            <body name="right_robot_link4" pos="-0.02 -0.03 0.19" quat="0 0 0 -1">
+                                <inertial pos="-0.01 0.03 0.1" mass="2.4" diaginertia="0.02 0.02 0.01" />
+                                <joint name="right_robot_joint4" pos="0 0 0" axis="0 1 0" range="-1.8675 2.6878" actuatorfrcrange="-64 64" />
+                                <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link4" />
+                                <body name="right_robot_link5" pos="-0.02 0.025 0.195" quat="0 0 0 -1">
+                                    <inertial pos="0 0 0.13" mass="2.4" diaginertia="0.01 0.01 0.01" />
+                                    <joint name="right_robot_joint5" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                    <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link5" />
+                                    <body name="right_robot_link6" pos="0 0.03 0.19">
+                                        <inertial pos="-0.01 0.06 0.07" quat="0.92388 0 0.382683 0" mass="2.1" diaginertia="0.011 0.01 0.009" />
+                                        <joint name="right_robot_joint6" pos="0 0 0" axis="0 1 0" range="-1.3963 4.5379" actuatorfrcrange="-39 39" />
+                                        <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link6" />
+                                        <body name="right_robot_link7" pos="-0.055 0.07 0.11" quat="0.707107 0 -0.707107 0">
+                                            <inertial pos="0 0 0.05" mass="1.4" diaginertia="0.01 0.01 0.01" />
+                                            <joint name="right_robot_joint7" pos="0 0 0" axis="0 0 1" range="-2.9671 2.9671" actuatorfrcrange="-39 39" />
+                                            <geom type="mesh" contype="1" conaffinity="1" mesh="robots_rizon4s_link7" />
+                                            <body name="right_robot_flange" pos="0 0 0.124" quat="0 0 0 -1">
+                                                <site name="ft_frame_right" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                                <site name="ee_frame_right" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                                <body name="right_robot_gripper_base_link">
+                                                    <inertial pos="4.22096e-09 -8.66338e-05 0.00351546" quat="-0.000251376 0.707107 -0.000251376 0.707107" mass="0.0244063" diaginertia="2.02963e-05 1.55299e-05 5.1709e-06" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="grippers_dh_robotics_ag145_base_link" />
+                                                    <body name="right_robot_gripper_finger1_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                        <inertial pos="0.019413 1.0484e-09 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                        <joint name="right_robot_gripper_finger1_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" actuatorfrcrange="-1000 1000" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                        <body name="right_robot_gripper_finger1_finger_link" pos="0.036999 0 -0.00019698">
+                                                            <inertial pos="-0.012522 -9.1789e-09 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="right_robot_gripper_finger2_knuckle_link" pos="0.016 0 0.10586">
+                                                        <inertial pos="0.019413 0.00025 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                        <joint name="right_robot_gripper_finger2_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-1000 1000" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                        <body name="right_robot_gripper_finger2_finger_link" pos="0.036999 0 -0.00019698">
+                                                            <inertial pos="-0.012522 -0.00025001 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="right_robot_gripper_finger1_inner_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                        <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                        <joint name="right_robot_gripper_finger1_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-105 105" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                        <body name="right_robot_gripper_finger1_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                            <inertial pos="0.0019731 -1.4867e-09 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                            <joint name="right_robot_gripper_finger1_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-0.1 0.1" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                            </body>
+                                                        </body>
+                                                    <body name="right_robot_gripper_finger2_inner_knuckle_link" pos="0.016 0 0.10586">
+                                                        <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                        <joint name="right_robot_gripper_finger2_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-3.14 3.14" actuatorfrcrange="-105 105" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                        <body name="right_robot_gripper_finger2_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                            <inertial pos="0.0019731 3.1569e-10 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                            <joint name="right_robot_gripper_finger2_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-0.1 0.1" />
+                                                            <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                            </body>
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </worldbody>
+    <actuator>
+        <position name="center_robot_joint1_motor" joint="center_robot_joint1" kp="200" />
+        <position name="center_robot_joint2_motor" joint="center_robot_joint2" kp="200" />
+        <position name="center_robot_joint3_motor" joint="center_robot_joint3" kp="200" />
+        <position name="center_robot_joint4_motor" joint="center_robot_joint4" kp="200" />
+        <position name="center_robot_joint5_motor" joint="center_robot_joint5" kp="200" />
+        <position name="center_robot_joint6_motor" joint="center_robot_joint6" kp="200" />
+        <position name="center_robot_joint7_motor" joint="center_robot_joint7" kp="200" />
+        <position name="left_robot_joint1_motor" joint="left_robot_joint1" kp="200" />
+        <position name="left_robot_joint2_motor" joint="left_robot_joint2" kp="200" />
+        <position name="left_robot_joint3_motor" joint="left_robot_joint3" kp="200" />
+        <position name="left_robot_joint4_motor" joint="left_robot_joint4" kp="200" />
+        <position name="left_robot_joint5_motor" joint="left_robot_joint5" kp="200" />
+        <position name="left_robot_joint6_motor" joint="left_robot_joint6" kp="200" />
+        <position name="left_robot_joint7_motor" joint="left_robot_joint7" kp="200" />
+        <position name="left_robot_gripper_finger1_joint_motor" joint="left_robot_gripper_finger1_joint" kp="200" />
+        <position name="right_robot_joint1_motor" joint="right_robot_joint1" kp="200" />
+        <position name="right_robot_joint2_motor" joint="right_robot_joint2" kp="200" />
+        <position name="right_robot_joint3_motor" joint="right_robot_joint3" kp="200" />
+        <position name="right_robot_joint4_motor" joint="right_robot_joint4" kp="200" />
+        <position name="right_robot_joint5_motor" joint="right_robot_joint5" kp="200" />
+        <position name="right_robot_joint6_motor" joint="right_robot_joint6" kp="200" />
+        <position name="right_robot_joint7_motor" joint="right_robot_joint7" kp="200" />
+        <position name="right_robot_gripper_finger1_joint_motor" joint="right_robot_gripper_finger1_joint" kp="200" />
+        <position name="stereo_left_yaw_motor" joint="stereo_left_yaw" kp="200" />
+        <position name="stereo_right_yaw_motor" joint="stereo_right_yaw" kp="200" />
+    </actuator>
+    <sensor>
+        <force name="force_ee_right" site="ft_frame_right" />
+        <torque name="torque_ee_right" site="ft_frame_right" />
+        <force name="force_ee_left" site="ft_frame_left" />
+        <torque name="torque_ee_left" site="ft_frame_left" />
+        </sensor>
+    <contact>
+        <exclude body1="left_robot_gripper_finger1_finger_link" body2="left_robot_gripper_finger1_finger_tip_link" />
+        <exclude body1="left_robot_gripper_finger2_finger_link" body2="left_robot_gripper_finger2_finger_tip_link" />
+        <exclude body1="right_robot_gripper_finger1_finger_link" body2="right_robot_gripper_finger1_finger_tip_link" />
+        <exclude body1="right_robot_gripper_finger2_finger_link" body2="right_robot_gripper_finger2_finger_tip_link" />
+        </contact>
+    <equality>
+        <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger2_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger1_inner_knuckle_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger2_inner_knuckle_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger1_finger_tip_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger2_finger_tip_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger2_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger1_inner_knuckle_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger2_inner_knuckle_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger1_finger_tip_joint" polycoef="0.0 1.0 0" />
+        <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger2_finger_tip_joint" polycoef="0.0 1.0 0" />
+        </equality>
+    </mujoco>

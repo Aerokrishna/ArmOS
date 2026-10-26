@@ -1,0 +1,6 @@
+# Hole "calibration" for franka_custom_control's spiral_insertion_demo.py on the sim scene fr3_peg_hole.yaml:
+# the TCP pose with the peg fully inserted (hole opening (0.6, 0, 0.06), 25 mm deep, tip 35 mm beyond the TCP),
+# gripper down. On the robot this file is written by `spiral_insertion_demo.py --calibration true`.
+hole_pose:
+  position: [0.6, 0.0, 0.07]
+  orientation_xyzw: [1.0, 0.0, 0.0, 0.0]

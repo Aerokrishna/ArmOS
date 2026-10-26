@@ -1,0 +1,21 @@
+# colcon
+build/
+install/
+log/
+
+# third-party franka checkouts (restored from third_party.repos + armos_ros2/franka/patches)
+armos_ros2/franka/franka_ros2/
+armos_ros2/franka/crisp_controllers/
+armos_ros2/franka/libfranka/
+armos_ros2/franka/franka_description/
+
+# python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# runtime output
+MUJOCO_LOG.TXT
+*_runtime.yaml
+.vscode/
+

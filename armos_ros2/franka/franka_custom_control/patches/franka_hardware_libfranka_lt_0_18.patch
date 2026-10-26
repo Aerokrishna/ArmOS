@@ -1,0 +1,149 @@
+diff -ruN a/franka_hardware/CMakeLists.txt b/franka_hardware/CMakeLists.txt
+--- a/franka_hardware/CMakeLists.txt	2026-10-08 19:12:33.429659770 +0530
++++ b/franka_hardware/CMakeLists.txt	2026-10-08 19:12:33.438659986 +0530
+@@ -29,10 +29,18 @@
+         src/franka_param_service_server.cpp
+         src/robot.cpp
+         src/ros_libfranka_logger.cpp
+-
+-        src/actions_helper/ptp_motion_handler.cpp
+ )
+ 
++# The PTP motion action needs libfranka's async position control (added in 0.18.0, robot
++# server protocol 10). Older libfranka (e.g. 0.17.x for FR3 system images 5.7/5.8) builds
++# without it; the error_recovery action is unaffected.
++if(Franka_VERSION VERSION_GREATER_EQUAL 0.18.0)
++  target_sources(franka_hardware PRIVATE src/actions_helper/ptp_motion_handler.cpp)
++else()
++  message(WARNING "libfranka ${Franka_VERSION} < 0.18.0: PTP motion action server disabled")
++  target_compile_definitions(franka_hardware PUBLIC FRANKA_HARDWARE_NO_PTP)
++endif()
++
+ target_include_directories(
+         franka_hardware
+         PRIVATE
+diff -ruN a/franka_hardware/include/franka_hardware/franka_action_server.hpp b/franka_hardware/include/franka_hardware/franka_action_server.hpp
+--- a/franka_hardware/include/franka_hardware/franka_action_server.hpp	2026-10-08 19:12:33.429659770 +0530
++++ b/franka_hardware/include/franka_hardware/franka_action_server.hpp	2026-10-08 19:12:33.435659914 +0530
+@@ -19,7 +19,9 @@
+ 
+ #include <franka_msgs/action/error_recovery.hpp>
+ #include "franka/exception.h"
++#ifndef FRANKA_HARDWARE_NO_PTP
+ #include "franka_hardware/actions_helper/ptp_motion_handler.hpp"
++#endif
+ #include "franka_hardware/robot.hpp"
+ 
+ #include <rclcpp/rclcpp.hpp>
+@@ -41,11 +43,15 @@
+   ActionServer(const rclcpp::NodeOptions& options, std::shared_ptr<Robot> robot);
+ 
+  private:
++#ifndef FRANKA_HARDWARE_NO_PTP
+   PTPMotionHandler ptp_motion_handler_;
++#endif
+   std::shared_ptr<Robot> robot_;
+   rclcpp_action::Server<franka_msgs::action::ErrorRecovery>::SharedPtr
+       error_recovery_action_server_;
++#ifndef FRANKA_HARDWARE_NO_PTP
+   rclcpp_action::Server<franka_msgs::action::PTPMotion>::SharedPtr ptp_motion_action_server_;
++#endif
+ 
+   std::mutex motion_id_mutex_;
+ 
+@@ -58,6 +64,7 @@
+       const std::shared_ptr<rclcpp_action::ServerGoalHandle<franka_msgs::action::ErrorRecovery>>&
+           goal_handle) -> void;
+ 
++#ifndef FRANKA_HARDWARE_NO_PTP
+   /**
+    * @brief Callback function for the PTP motion action server
+    *
+@@ -66,6 +73,7 @@
+   auto ptpMotionAction(
+       const std::shared_ptr<rclcpp_action::ServerGoalHandle<franka_msgs::action::PTPMotion>>&
+           goal_handle) -> void;
++#endif
+ };
+ 
+ }  // namespace franka_hardware
+diff -ruN a/franka_hardware/src/franka_action_server.cpp b/franka_hardware/src/franka_action_server.cpp
+--- a/franka_hardware/src/franka_action_server.cpp	2026-10-08 19:12:33.430659794 +0530
++++ b/franka_hardware/src/franka_action_server.cpp	2026-10-08 19:12:33.436659938 +0530
+@@ -17,13 +17,18 @@
+ namespace franka_hardware {
+ 
+ ActionServer::ActionServer(const rclcpp::NodeOptions& options, std::shared_ptr<Robot> robot)
+-    : rclcpp::Node("action_server", options), ptp_motion_handler_(robot), robot_(robot) {
++    : rclcpp::Node("action_server", options),
++#ifndef FRANKA_HARDWARE_NO_PTP
++      ptp_motion_handler_(robot),
++#endif
++      robot_(robot) {
+   error_recovery_action_server_ = rclcpp_action::create_server<franka_msgs::action::ErrorRecovery>(
+       this, "~/error_recovery",
+       [](auto /*uuid*/, auto /*goal*/) { return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE; },
+       [](const auto& /*goal_handle*/) { return rclcpp_action::CancelResponse::ACCEPT; },
+       [this](const auto& goal_handle) { errorRecoveryAction(goal_handle); });
+ 
++#ifndef FRANKA_HARDWARE_NO_PTP
+   ptp_motion_action_server_ = rclcpp_action::create_server<franka_msgs::action::PTPMotion>(
+       this, "~/ptp_motion",
+       [](auto /*uuid*/, auto /*goal*/) { return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE; },
+@@ -32,6 +37,7 @@
+         return rclcpp_action::CancelResponse::ACCEPT;
+       },
+       [this](const auto& goal_handle) { ptpMotionAction(goal_handle); });
++#endif
+ 
+   RCLCPP_INFO(get_logger(), "Action server started");
+ }
+@@ -50,6 +56,7 @@
+   }
+ }
+ 
++#ifndef FRANKA_HARDWARE_NO_PTP
+ auto ActionServer::ptpMotionAction(
+     const std::shared_ptr<rclcpp_action::ServerGoalHandle<franka_msgs::action::PTPMotion>>&
+         goal_handle) -> void {
+@@ -103,5 +110,6 @@
+     goal_handle->abort(result);
+   }
+ }
++#endif
+ 
+ }  // namespace franka_hardware
+diff -ruN a/franka_hardware/test/CMakeLists.txt b/franka_hardware/test/CMakeLists.txt
+--- a/franka_hardware/test/CMakeLists.txt	2026-10-08 19:12:33.431659818 +0530
++++ b/franka_hardware/test/CMakeLists.txt	2026-10-08 19:12:33.437659962 +0530
+@@ -9,10 +9,12 @@
+         ${CMAKE_CURRENT_SOURCE_DIR}/include/
+ )
+ 
++set(_hw_test_sources franka_hardware_interface_test.cpp)
++if(Franka_VERSION VERSION_GREATER_EQUAL 0.18.0)
++  list(APPEND _hw_test_sources franka_action_server_test.cpp ptp_motion_test.cpp)
++endif()
+ ament_add_gmock(${PROJECT_NAME}_test
+-  franka_hardware_interface_test.cpp
+-  franka_action_server_test.cpp
+-  ptp_motion_test.cpp
++  ${_hw_test_sources}
+   RUNNER "${ROS_ISOLATED_TEST_RUNNER}"
+ )
+ 
+diff -ruN a/franka_hardware/test/include/franka_hardware_mocks/franka_robot_mock.hpp b/franka_hardware/test/include/franka_hardware_mocks/franka_robot_mock.hpp
+--- a/franka_hardware/test/include/franka_hardware_mocks/franka_robot_mock.hpp	2026-10-08 19:12:33.432659842 +0530
++++ b/franka_hardware/test/include/franka_hardware_mocks/franka_robot_mock.hpp	2026-10-08 19:12:33.437659962 +0530
+@@ -26,9 +26,11 @@
+               startCartesianVelocityControl,
+               (const research_interface::robot::Move::ControllerMode&),
+               (override));
++#ifndef FRANKA_HARDWARE_NO_PTP
+   MOCK_METHOD(std::unique_ptr<franka::ActiveControlBase>,
+               startAsyncJointPositionControl,
+               (const research_interface::robot::Move::ControllerMode&,
+                (const std::optional<std::vector<double>>&)),
+               (override));
++#endif
+ };

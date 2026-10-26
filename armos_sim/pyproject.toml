@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "armos-sim"
+version = "0.2.0"
+description = "MuJoCo simulation of robot arms (position and torque control) for armos"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+
+authors = [
+    { name = "armos contributors" }
+]
+
+keywords = [
+    "robotics",
+    "simulation",
+    "mujoco",
+    "franka",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Robotics",
+]
+
+# Versions follow mujoco_rl_bed (see ../constraints.txt). No numpy upper bound: the
+# package must run on numpy 1.26 (ROS Humble env) and numpy 2.x (RL env).
+dependencies = [
+    "armos-core",
+    "mujoco>=3.10",
+    "numpy>=1.24",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+
+# Pink IK modes (TASK_POSE). In the ROS env use ROS pinocchio and
+# `pip install pin-pink==4.2.0 --no-deps` instead of this extra.
+ik = [
+    "pin>=2.6",
+    "pin-pink",
+    "quadprog>=0.1.13",
+]
+
+# URDF -> MJCF conversion (urdf2xml.py)
+convert = [
+    "trimesh>=4",
+    "pycollada>=0.9.3",
+]
+
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+include = [
+    "armos_sim",
+    "armos_sim.*",
+]
+
+[tool.setuptools.package-data]
+armos_sim = ["assets/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+]

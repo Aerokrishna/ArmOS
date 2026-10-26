@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+# Pinned to the system interpreter: ROS Humble's rclpy and PyQt5 live there, not in conda.
+from franka_control_ui.main import main
+
+main()

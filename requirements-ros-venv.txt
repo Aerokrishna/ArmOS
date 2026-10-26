@@ -1,0 +1,27 @@
+# ~/.venvs/armos_ws: ROS 2 Humble nodes + the sim bridge (system python 3.10, numpy 1.x).
+#
+#   python3 -m venv --system-site-packages ~/.venvs/armos_ws
+#   source ~/.venvs/armos_ws/bin/activate        # also sets PYTHONNOUSERSITE=1 (see the activate script)
+#   pip install --no-deps -r requirements-ros-venv.txt -c constraints.txt
+#   pip install --no-deps -e armos_core -e armos_sim
+#   python -m colcon build --base-paths armos_ros2 --symlink-install   # venv python -> venv shebangs
+#
+# --no-deps everywhere: a dependency resolve pulls numpy 2 / pip pinocchio and breaks ROS. Pinocchio comes
+# from ROS. The user site (~/.local) must stay off:
+# it holds mujoco_rl_bed's RL packages.
+numpy==1.26.4            # ROS Humble binaries are built against numpy 1.x
+mujoco==3.10.0           # = constraints.txt (mujoco_rl_bed pin)
+absl-py==2.3.0           # mujoco
+etils==1.12.2            # mujoco (etils[epath])
+fsspec==2024.10.0        # etils[epath]
+importlib_resources==6.5.2  # etils[epath]
+typing_extensions==4.12.2   # etils[epath]
+glfw==2.9.0              # mujoco.viewer
+PyOpenGL==3.1.9          # mujoco.viewer
+PyYAML==6.0.2            # armos_core / armos_sim (>= 6.0), same as mujoco_rl_bed
+pin-pink==4.2.0          # TASK_POSE IK
+qpsolvers==4.8.2         # pink
+scipy==1.11.4            # qpsolvers; the system python3-scipy 1.8 only supports numpy < 1.25
+quadprog==0.1.13         # pink's QP solver
+loop-rate-limiters==1.2.0   # pink
+pytest==6.2.5

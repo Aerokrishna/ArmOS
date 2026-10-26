@@ -1,0 +1,4 @@
+float32 position # 0 to 1
+---
+bool success
+string message

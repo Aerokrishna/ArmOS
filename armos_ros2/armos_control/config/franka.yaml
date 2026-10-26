@@ -1,0 +1,28 @@
+
+scene_xml_path: scene.xml
+robot_xml_path: panda.xml
+assets_dir : franka_emika_panda
+
+# Franka Hand: tendon actuator, ctrl 0..255 (closed..open)
+grippers:
+  left:  actuator8
+gripper_closed: 0.0
+gripper_open:   255.0
+
+# Stereo camera yaw actuator names
+stereo_left_yaw_motor:  null
+stereo_right_yaw_motor: null
+
+arms:
+  left:
+    start_body:           link0
+    ee_site:              attachment_site
+    wrench_force_sensor:  null
+    wrench_torque_sensor: null
+    q_home: [0.0,
+            -0.78539816,
+                0.0,
+            -2.35619449,
+                0.0,
+                1.57079633,
+                0.78539816]

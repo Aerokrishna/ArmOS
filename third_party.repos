@@ -1,0 +1,22 @@
+# Restore with (from ~/armos_ws):
+#   vcs import armos_ros2/franka < third_party.repos
+#   (cd armos_ros2/franka/libfranka && git submodule update --init --recursive)
+#   (cd armos_ros2/franka/franka_ros2 && git apply ../patches/franka_ros2.patch)
+#   (cd armos_ros2/franka/crisp_controllers && git apply ../patches/crisp_controllers.patch)
+repositories:
+  franka_ros2:
+    type: git
+    url: https://github.com/frankarobotics/franka_ros2.git
+    version: 3b50164eabbe2d461baca007bbbbe03c024387bd  # v2.7.1
+  crisp_controllers:
+    type: git
+    url: https://github.com/learnsyslab/crisp_controllers.git
+    version: 0279dc8f1196dab6a2b2cd5af853dd3d4dc3a969  # v2.4.1-3
+  libfranka:
+    type: git
+    url: https://github.com/frankarobotics/libfranka.git
+    version: 4448c390ea7c6af3966bcfae6308d41cee4eb7ac  # 0.17.0
+  franka_description:
+    type: git
+    url: https://github.com/frankarobotics/franka_description.git
+    version: 02afaae282d4a8e10d7d2f781b23b3515c303ce5  # 2.8.1

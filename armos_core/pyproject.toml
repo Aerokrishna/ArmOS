@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "armos-core"
+version = "0.1.0"
+description = "armos math, kinematics, control laws and types (no ROS)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "armos contributors" }]
+
+# Versions follow mujoco_rl_bed (see ../constraints.txt). No numpy upper bound: the
+# package must run on numpy 1.26 (ROS Humble env) and numpy 2.x (RL env).
+dependencies = [
+    "mujoco>=3.10",
+    "numpy>=1.24",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+# armos_core.kinematics.pinocchio_arm. In the ROS env use ROS pinocchio instead.
+pinocchio = ["pin>=2.6"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["armos_core", "armos_core.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"

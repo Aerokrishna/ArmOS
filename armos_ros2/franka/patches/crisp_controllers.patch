@@ -1,0 +1,80 @@
+diff --git a/include/crisp_controllers/cartesian_admittance_controller.hpp b/include/crisp_controllers/cartesian_admittance_controller.hpp
+index 59dc183..452bc2c 100644
+--- a/include/crisp_controllers/cartesian_admittance_controller.hpp
++++ b/include/crisp_controllers/cartesian_admittance_controller.hpp
+@@ -27,11 +27,7 @@
+ 
+ #include <crisp_controllers/utils/ros2_version.hpp>
+ 
+-#if ROS2_VERSION_ABOVE_HUMBLE
+ #include <crisp_controllers/cartesian_admittance_controller_parameters.hpp>
+-#else
+-#include <cartesian_admittance_controller_parameters.hpp>
+-#endif
+ 
+ #include <sensor_msgs/msg/joint_state.hpp>
+ #include "realtime_tools/realtime_buffer.hpp"
+diff --git a/include/crisp_controllers/cartesian_controller.hpp b/include/crisp_controllers/cartesian_controller.hpp
+index 32df937..55b9133 100644
+--- a/include/crisp_controllers/cartesian_controller.hpp
++++ b/include/crisp_controllers/cartesian_controller.hpp
+@@ -21,11 +21,7 @@
+ 
+ #include <crisp_controllers/utils/ros2_version.hpp>
+ 
+-#if ROS2_VERSION_ABOVE_HUMBLE
+ #include <crisp_controllers/cartesian_controller_parameters.hpp>
+-#else
+-#include <cartesian_controller_parameters.hpp>
+-#endif
+ 
+ #include <sensor_msgs/msg/joint_state.hpp>
+ #include "realtime_tools/realtime_buffer.hpp"
+diff --git a/include/crisp_controllers/pose_broadcaster.hpp b/include/crisp_controllers/pose_broadcaster.hpp
+index 46fb317..86017c0 100644
+--- a/include/crisp_controllers/pose_broadcaster.hpp
++++ b/include/crisp_controllers/pose_broadcaster.hpp
+@@ -9,11 +9,7 @@
+ #include <controller_interface/controller_interface.hpp>
+ #include <crisp_controllers/utils/ros2_version.hpp>
+ 
+-#if ROS2_VERSION_ABOVE_HUMBLE
+ #include <crisp_controllers/pose_broadcaster_parameters.hpp>
+-#else
+-#include <pose_broadcaster_parameters.hpp>
+-#endif
+ 
+ #include <geometry_msgs/msg/pose_stamped.hpp>
+ #include <pinocchio/algorithm/kinematics.hpp>
+diff --git a/include/crisp_controllers/torque_feedback_controller.hpp b/include/crisp_controllers/torque_feedback_controller.hpp
+index 0bc9475..a7487a2 100644
+--- a/include/crisp_controllers/torque_feedback_controller.hpp
++++ b/include/crisp_controllers/torque_feedback_controller.hpp
+@@ -9,11 +9,7 @@
+ #include <controller_interface/controller_interface.hpp>
+ #include <crisp_controllers/utils/ros2_version.hpp>
+ 
+-#if ROS2_VERSION_ABOVE_HUMBLE
+ #include <crisp_controllers/torque_feedback_controller_parameters.hpp>
+-#else
+-#include <torque_feedback_controller_parameters.hpp>
+-#endif
+ #include <geometry_msgs/msg/wrench_stamped.hpp>
+ #include <pinocchio/multibody/data.hpp>
+ #include <pinocchio/multibody/model.hpp>
+diff --git a/include/crisp_controllers/twist_broadcaster.hpp b/include/crisp_controllers/twist_broadcaster.hpp
+index f4e7694..7bc1e2e 100644
+--- a/include/crisp_controllers/twist_broadcaster.hpp
++++ b/include/crisp_controllers/twist_broadcaster.hpp
+@@ -9,11 +9,7 @@
+ #include <controller_interface/controller_interface.hpp>
+ #include <crisp_controllers/utils/ros2_version.hpp>
+ 
+-#if ROS2_VERSION_ABOVE_HUMBLE
+ #include <crisp_controllers/twist_broadcaster_parameters.hpp>
+-#else
+-#include <twist_broadcaster_parameters.hpp>
+-#endif
+ 
+ #include <geometry_msgs/msg/twist_stamped.hpp>
+ #include <pinocchio/algorithm/kinematics.hpp>

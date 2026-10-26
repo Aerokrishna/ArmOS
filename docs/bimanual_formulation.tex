@@ -1,0 +1,115 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\skewm}[1]{[\vect{#1}]_\times}
+\DeclareMathOperator{\db}{db}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\diag}{diag}
+
+\title{Bimanual Coordination in \texttt{armos}: Formulation}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent All controllers below output Cartesian TCP pose targets, tracked by a Cartesian impedance inner loop
+(crisp on the FR3, the same law in simulation). Wrenches $\vect w=[\vect f;\vect\tau]$ are \emph{robot-on-environment};
+$\skewm{a}\vect b=\vect a\times\vect b$, $\Log:SO(3)\to\mathbb R^3$, $\Exp=\Log^{-1}$.
+
+%=====================================================================================================
+\section{Hybrid admittance law}\label{sec:adm}
+
+A virtual pose $(\vect p_v,R_v)$ with velocity $\vect v$ is integrated and sent to the inner loop as the target. A
+per-axis mask $\vect m\in\{0,1\}^6$ selects pose axes ($m_i=1$) and force axes ($m_i=0$):
+$S_p=\diag(\vect m)$, $S_f=I-S_p$. With target pose $(\vect p_t,R_t)$, target wrench $\vect w_t$ and measured wrench
+$\vect w$:
+\begin{equation}
+  M\dot{\vect v} = S_f\,\db(\vect w_t-\vect w,\vect\beta) - S_pK\vect e - (S_pD+S_fD_f)\,\vect v,
+  \qquad
+  \vect e=\begin{bmatrix}\vect p_v-\vect p_t\\ \Log(R_vR_t^\top)\end{bmatrix},
+  \label{eq:adm}
+\end{equation}
+with $\db(x,\beta)=\operatorname{sign}(x)\max(|x|-\beta,0)$. Pose axes are a spring--damper to the target; force axes
+have no spring, move at $e_{w,i}/D_{f,i}$ in free space and settle where the measured wrench equals the target.
+Discretized semi-implicitly, $\vect v_{k+1}=(M+\Delta tD_{\mathrm{act}})^{-1}(M\vect v_k+\Delta t\,\vect u_k)$, followed by
+velocity and acceleration limits, $\vect p_{v,k+1}=\vect p_{v,k}+\Delta t\,\dot{\vect p}_v$,
+$R_{v,k+1}=\Exp(\Delta t\,\vect\omega_v)R_{v,k}$.
+
+%=====================================================================================================
+\section{Temporal synchronization}\label{sec:temporal}
+
+Each arm $i$ moves along a straight line from its start to its goal, parameterized by a phase $\phi_i\in[0,1]$:
+\begin{equation}
+  \vect p_i=\vect p_{i0}+\phi_i\Delta\vect p_i,\qquad R_i=\Exp(\phi_i\Delta\vect\theta_i)R_{i0},\qquad
+  \Delta\vect\theta_i=\Log(R_{ig}R_{i0}^\top).
+\end{equation}
+The phases evolve with first-order coupled dynamics:
+\begin{align}
+  \phi_1^{k+1} &= \phi_1^k+\Delta t\left[\omega_1+k_c(\phi_2^k-\phi_1^k)\right],\\
+  \phi_2^{k+1} &= \phi_2^k+\Delta t\left[\omega_2+k_c(\phi_1^k-\phi_2^k)\right],
+\end{align}
+where $\omega_i$ follows a trapezoidal profile (accelerate, cruise, brake to $\phi_i=1$ at rest) with the
+Cartesian limits converted to phase limits, $\bar\omega_i=\min(v_{\max}/\|\Delta\vect p_i\|,\ \omega_{\max}/\|\Delta\vect\theta_i\|)$.
+Both arms share the slower arm's limits, so they arrive together regardless of path length; the coupling pulls
+the phases together whenever they differ, and $0\le\dot\phi_i\le\bar\omega_i$. The phase difference obeys
+$\delta_{k+1}=(1-2k_c\Delta t)\delta_k+\Delta t(\omega_1-\omega_2)$: it converges without oscillation for
+$2k_c\Delta t\le1$, with residual $(\omega_1-\omega_2)/(2k_c)$. Since both paths are affine in the common phase, one
+hand moves along a straight line relative to an object carried by the other (handover).
+
+%=====================================================================================================
+\section{Grasp matrix}\label{sec:grasp}
+
+With lever arms $\vect r_i=\vect p_i-\vect p_O$ (world frame) and stacked end-effector wrenches on the object
+$\vect w_{ee}=[\vect f_1;\vect\tau_1;\vect f_2;\vect\tau_2]$:
+\begin{equation}
+  G=\begin{bmatrix} I_3 & 0 & I_3 & 0\\ \skewm{r_1} & I_3 & \skewm{r_2} & I_3\end{bmatrix},\qquad
+  \vect w_O=G\vect w_{ee},\qquad N=I_{12}-G^\dagger G,\qquad \vect w_{\mathrm{int}}=N\vect w_{ee},
+\end{equation}
+and for a rigid grasp $[\vect v_1;\vect v_2]=G^\top\vect v_O$. A squeeze
+$\vect w_{sq}=[F\hat{\vect n};\vect 0;-F\hat{\vect n};\vect 0]$, $\hat{\vect n}=(\vect p_2-\vect p_1)/\|\vect p_2-\vect p_1\|$,
+lies in the null space ($G\vect w_{sq}=0$): opposing forces along the line between the hands cancel in the object
+wrench, while forces in the same direction (the weight) add up.
+
+%=====================================================================================================
+\section{Object-level compliance (spatial synchronization)}\label{sec:spatial}
+
+\paragraph{Object layer.} On engage, with the grasp closed, the grasp transforms $T_{O\to i}=T_O^{-1}T_i$ are captured.
+The object pose is measured from both arms ($\hat T_O^{(i)}=T_iT_{O\to i}^{-1}$, averaged), and the object wrench is
+\begin{equation}
+  \vect w_O=G\,\vect w_{ee}-\vect b_O,
+\end{equation}
+where the tare $\vect b_O$, taken with the object lifted and still, removes its weight. The admittance law
+\eqref{eq:adm} runs on the object frame, giving the virtual object pose $T_O^v$, and the end-effector targets follow
+rigidly:
+\begin{equation}
+  T_i^{\mathrm{cmd}}=T_O^v\,T_{O\to i}\qquad\Longleftrightarrow\qquad \vect v^{\mathrm{task}}=G^\top\vect v_O .
+\end{equation}
+The object thus complies with external forces on its force axes, or applies a commanded wrench (e.g.\
+force-controlled placing: after the tare, $\vect w_O$ measures only the contact with the support).
+
+\paragraph{Null-space correctors (to be implemented).} Two terms are added in the null space of $G$, so they do not
+move the object:
+\begin{equation}
+  \vect v^{\mathrm{cmd}} = G^\top\vect v_O + N\,\vect v^{\mathrm{rel}} + N\,\vect v^{\mathrm{int}} .
+\end{equation}
+\begin{itemize}
+  \item \textbf{Relative-pose correction.} With the per-arm pose error between the rigid-grasp target and the measured
+        pose, $\vect e_i=\left[\vect p_i^{\mathrm{cmd}}-\vect p_i;\ \Log(R_i^{\mathrm{cmd}}R_i^\top)\right]$,
+        $\vect v^{\mathrm{rel}}=K_r[\vect e_1;\vect e_2]$ restores the grasp geometry if one arm lags while carrying.
+  \item \textbf{Internal-force regulation.} With the desired squeeze $\vect w_{\mathrm{int}}^{\mathrm{des}}=\vect w_{sq}(F_{\mathrm{des}})$,
+        the internal force error drives a damped admittance (no spring):
+        \begin{equation}
+          \vect e_f=s_{\mathrm{int}}\left(\vect w_{\mathrm{int}}^{\mathrm{des}}-N\vect w_{ee}\right),\qquad
+          M_{\mathrm{int}}\dot{\vect v}^{\mathrm{int}}+D_{\mathrm{int}}\vect v^{\mathrm{int}}=\vect e_f ,
+        \end{equation}
+        so the hands move towards or away from each other until the measured squeeze equals $F_{\mathrm{des}}$.
+\end{itemize}
+Each arm's target is then integrated from its stacked twist, $\vect p_i\leftarrow\vect p_i+\Delta t\,\dot{\vect p}_i$,
+$R_i\leftarrow\Exp(\Delta t\,\vect\omega_i)R_i$.
+
+\end{document}

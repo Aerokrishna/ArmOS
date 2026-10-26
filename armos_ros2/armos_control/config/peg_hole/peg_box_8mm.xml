@@ -1,0 +1,14 @@
+<mujoco model="peg_box_8mm">
+  <!-- 8 x 8 x 50 mm aluminium peg held rigidly by the Franka hand: mujoco_rl_bed's BoxPeg as used by
+       forge_peg_cuboid and compliant_peg_s3* (top face 15 mm above the TCP, tip 35 mm beyond it along the
+       TCP z axis, cross-section along the TCP x / y axes). Attach it at the TCP site (fr3_peg_hole.yaml).
+       Collision bit 2 only: it touches the hole fixture, not the robot (as in training). -->
+  <worldbody>
+    <body name="peg" pos="0 0 0.01">
+      <geom name="peg_geom" type="box" size="0.004 0.004 0.025" density="2700" friction="0.75 0.005 0.0001"
+            solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2" conaffinity="2" condim="3"
+            rgba="0.9 0.6 0.1 1"/>
+      <site name="peg_tip" pos="0 0 0.025" size="0.0015" rgba="1 0 0 1" group="4"/>
+    </body>
+  </worldbody>
+</mujoco>

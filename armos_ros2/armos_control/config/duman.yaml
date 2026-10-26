@@ -1,0 +1,55 @@
+scene_xml_path: scene.xml
+robot_xml_path: duman.xml
+assets_dir : duman
+# Gripper: position actuators for DH AG145
+grippers:
+  left:  left_robot_gripper_finger1_joint_motor
+  right: right_robot_gripper_finger1_joint_motor
+gripper_closed: 0.0      # [rad]
+gripper_open:   -0.85    # [rad]
+
+
+# Stereo camera yaw actuator names
+# stereo_left_yaw_motor:  null
+# stereo_right_yaw_motor: null
+
+arms:
+  left:
+    start_body:           actuator_2
+    ee_site:              ee_left
+    wrench_force_sensor:  null
+    wrench_torque_sensor: null
+    q_home: [0.0,
+            0,
+                0.0,
+                0,
+                0.0,
+                0]
+
+  right:
+    start_body:           actuator
+    ee_site:              ee_right
+    wrench_force_sensor:  null
+    wrench_torque_sensor: null
+    q_home: [0.0,
+            0,
+                0.0,
+            0,
+                0.0,
+                0]
+
+
+
+  # center:
+  #   start_body: center_robot_base_link
+  #   ee_site:    ee_frame_center
+  #   wrench_force_sensor:  null
+  #   wrench_torque_sensor: null
+  #   q_home: [1.57, -1.57, -0.78, -1.57, 1.97, -0.39, -1.57]
+
+  # right:
+  #   start_body:           right_robot_base_link
+  #   ee_site:              ee_frame_right
+  #   wrench_force_sensor:  force_ee_right
+  #   wrench_torque_sensor: torque_ee_right
+  #   q_home: [1.57, -1.57, -0.78, -1.57, 1.97, -0.39, -1.57]

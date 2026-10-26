@@ -1,0 +1,52 @@
+# Parameters for the franka_control_ui node. All topic names are relative to the robot
+# namespace. Lists of numbers must be written as floats (0.0, not 0).
+
+/**/franka_control_ui:
+  ros__parameters:
+    topics:
+      target_pose: target_pose
+      target_wrench: target_wrench
+      target_joint: target_joint
+      target_stiffness: target_stiffness
+      current_pose: current_pose                # crisp pose_broadcaster
+      joint_states: joint_states
+      external_wrench: franka_robot_state_broadcaster/external_wrench_in_base_frame
+
+    base_frame: base
+    controller_manager: controller_manager
+    command_controller: cartesian_controller   # stiffness sliders are read from this one
+    error_recovery_action: action_server/error_recovery
+
+    gripper:
+      node: franka_gripper                       # franka_gripper node (load_gripper:=true)
+      open_width: 0.08                           # m, OPEN target and max MOVE TO width
+      speed: 0.1                                 # m/s, initial value of the speed box
+      force: 20.0                                # N, initial value of the grasp force box
+
+    # Slider ranges. Positions double as the workspace box for jogging.
+    ranges:
+      position_min: [0.20, -0.50, 0.05]
+      position_max: [0.80, 0.50, 0.80]
+      # rX is centred on 180 deg so the usual tool-down pose is not at the slider wrap.
+      euler_center_deg: [180.0, 0.0, 0.0]
+      euler_half_span_deg: [180.0, 90.0, 180.0]
+
+    limits:
+      stiffness_max: [2000.0, 60.0]              # keep equal to variable_max_stiffness
+      wrench_max: [20.0, 3.0]                    # N, Nm (target wrench spinboxes)
+      wrench_alert: [20.0, 4.0]                  # N, Nm (monitor alert)
+      max_target_offset_pos: 0.25                # refuse pose targets farther than this (m)
+      max_target_offset_rot_deg: 60.0
+
+    jog:
+      max_linear: 0.05                           # m/s
+      max_angular_deg: 15.0                      # deg/s
+      max_lead_pos: 0.03                         # pause jog when target leads robot by (m)
+      max_lead_rot_deg: 10.0
+      rate: 50.0
+
+    publish_rate_limit: 30.0                     # max Hz for slider-driven publishing
+    stale_timeout: 0.5
+    plot:
+      buffer_seconds: 60.0
+      sample_hz: 100.0

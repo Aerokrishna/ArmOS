@@ -1,0 +1,120 @@
+# crisp controllers for the FR3. cartesian_control.launch.py merges this file on top of
+# franka_bringup/config/controllers.yaml and then overwrites, for every crisp controller:
+#   joints              -> <robot_type>_joint1..7
+#   end_effector_frame  -> launch arg ee_frame (auto: <robot_type>_hand_tcp with gripper,
+#                          <robot_type>_link8 without)
+# The values below are the fallback when the file is used on its own.
+
+/**:
+  controller_manager:
+    ros__parameters:
+      pose_broadcaster:
+        type: crisp_controllers/PoseBroadcaster
+      cartesian_controller:
+        type: crisp_controllers/CartesianController
+      gravity_compensation:
+        type: crisp_controllers/CartesianController
+      joint_impedance_controller:
+        type: crisp_controllers/CartesianController
+      cartesian_admittance_controller:
+        type: crisp_controllers/CartesianAdmittanceController
+
+  franka_robot_state_broadcaster:
+    ros__parameters:
+      # Convenience topics (external wrench, measured joints, ...). Default is 1000 Hz;
+      # 250 Hz is plenty for monitoring and keeps the Python UI light.
+      convenience_publish_rate: 250
+
+  pose_broadcaster:
+    ros__parameters:
+      joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+      end_effector_frame: fr3_link8
+      base_frame: base
+      publish_frequency: 250.0
+
+  # Cartesian impedance. Targets, stiffness and wrench are all in the base frame
+  # (use_local_jacobian: false), which is what the UI assumes.
+  cartesian_controller:
+    ros__parameters:
+      joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+      end_effector_frame: fr3_link8
+      base_frame: base
+      task:
+        # xy stiff so sliding friction (~1-2 N) lags the target by ~1 mm, not ~3-4 mm.
+        k_pos_x: 1500.0
+        k_pos_y: 1500.0
+        k_pos_z: 500.0
+        k_rot_x: 30.0
+        k_rot_y: 30.0
+        k_rot_z: 30.0
+        d_pos_x: 80.0
+        d_pos_y: 80.0
+        d_pos_z: 30.0
+        d_rot_x: 2.0
+        d_rot_y: 2.0
+        d_rot_z: 2.0
+      nullspace:
+        stiffness: 2.0
+      variable_stiffness:
+        enabled: true
+        topic: target_stiffness
+      variable_max_stiffness:
+        translational: 2000.0
+        rotational: 60.0
+      use_friction: false
+      use_coriolis_compensation: true
+      use_local_jacobian: false
+
+  # Hand guiding: free translation, soft orientation hold.
+  gravity_compensation:
+    ros__parameters:
+      joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+      end_effector_frame: fr3_link8
+      base_frame: base
+      task:
+        k_pos_x: 0.0
+        k_pos_y: 0.0
+        k_pos_z: 0.0
+        k_rot_x: 0.5
+        k_rot_y: 0.5
+        k_rot_z: 0.5
+      nullspace:
+        stiffness: 0.0
+      use_friction: false
+      use_coriolis_compensation: true
+      use_local_jacobian: true
+
+  # Joint impedance built from CartesianController: zero task stiffness and no nullspace
+  # projection, so target_joint drives the joints directly.
+  joint_impedance_controller:
+    ros__parameters:
+      joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+      end_effector_frame: fr3_link8
+      base_frame: base
+      task:
+        k_pos_x: 0.0
+        k_pos_y: 0.0
+        k_pos_z: 0.0
+        k_rot_x: 0.0
+        k_rot_y: 0.0
+        k_rot_z: 0.0
+      max_delta_tau: 0.5
+      nullspace:
+        stiffness: 5.0
+        projector_type: none
+        damping: 0.5
+        max_tau: 5.0
+      use_friction: false
+      use_coriolis_compensation: true
+      use_local_jacobian: true
+      limit_error: true
+      limit_torques: true
+
+  # Cartesian admittance with impedance outer loop. Only the required parameters are set;
+  # everything else keeps the defaults from crisp_controllers'
+  # src/cartesian_admittance_controller.yaml. The F/T input is read from ft_sensor_wrench.
+  cartesian_admittance_controller:
+    ros__parameters:
+      joints: [fr3_joint1, fr3_joint2, fr3_joint3, fr3_joint4, fr3_joint5, fr3_joint6, fr3_joint7]
+      end_effector_frame: fr3_link8
+      base_frame: base

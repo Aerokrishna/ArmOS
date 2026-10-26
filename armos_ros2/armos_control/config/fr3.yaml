@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# FR3 + Franka Hand (fr3_hand.xml), single arm. Default armos_sim config.
+#
+# WHAT YOU SPECIFY HERE
+#   scene_xml_path        – MJCF scene file, relative to this config file
+#   robot_xml_path        – MJCF robot-only file included by the scene
+#   arms.<id>.start_body  – first body of the arm's kinematic chain
+#   arms.<id>.ee_site     – MuJoCo site name at the end-effector
+#   arms.<id>.q_home      – home joint configuration [rad]
+#   arms.<id>.wrench_force_sensor  / wrench_torque_sensor  (optional)
+#
+# WHAT IS AUTO-DERIVED FROM THE MJCF
+#   joint_names    – every hinge/slide joint on the chain start_body→ee_body
+#   actuator_names – actuators driving those joints (matched by joint)
+#   q_lo / q_hi    – joint range limits read from <joint range="…"/>
+#   base_world     – world-frame origin of start_body (from mj_forward at q=0)
+#
+# AUXILIARY ACTUATORS
+#   grippers: per-arm gripper actuator; gripper_open / gripper_closed are its ctrl values
+# ─────────────────────────────────────────────────────────────────────────────
+
+scene_xml_path: scene_hand.xml
+robot_xml_path: fr3_hand.xml
+assets_dir: franka_fr3
+
+# Franka Hand: tendon actuator, ctrl 0..255 (closed..open)
+grippers:
+  left: fr3_gripper
+gripper_closed: 0.0
+gripper_open:   255.0
+
+stereo_left_yaw_motor:  null
+stereo_right_yaw_motor: null
+
+# Torque actuation: the bridge runs crisp's Cartesian impedance on target_pose (robot-compatible
+# topics) and maps the /armos/<arm>/* joint / cart messages onto the torque modes.
+actuation: torque
+
+physics:
+  timestep: 0.002   # [s] torque laws every physics step (500 Hz)
+  decimation:       # physics steps per update
+    control: 2      # control tick (250 Hz): telemetry, robot topics, /clock, callbacks
+    admittance: 2   # sim-internal CARTESIAN_ADMITTANCE outer loop
+
+arms:
+  left:
+    start_body:           base
+    ee_site:              fr3_hand_tcp
+    wrench_force_sensor:  ft_force     # raw, ft_site frame (hand origin, hand = TCP axes), includes hand gravity
+    wrench_torque_sensor: ft_torque
+    q_home: [0.0,
+            -0.78539816,
+                0.0,
+            -2.35619449,
+                0.0,
+                1.57079633,
+                0.78539816]

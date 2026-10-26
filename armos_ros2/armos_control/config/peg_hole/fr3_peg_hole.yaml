@@ -1,0 +1,39 @@
+# FR3 + Franka Hand holding an 8 mm square peg, and a 9 mm square hole fixture: the sim scene of the scripted
+# spiral (`ros2 launch armos_control admittance.launch.py sim_config:=peg_hole/fr3_peg_hole.yaml`).
+# Same robot, physics and topics as ../fr3.yaml; the peg / hole are attached through MjSpec (`attach`, see
+# armos_sim's loader).
+
+scene_xml_path: scene_hand.xml
+robot_xml_path: fr3_hand.xml
+assets_dir: franka_fr3
+
+grippers:
+  left: fr3_gripper
+gripper_closed: 0.0
+gripper_open:   255.0
+
+stereo_left_yaw_motor:  null
+stereo_right_yaw_motor: null
+
+actuation: torque
+
+physics:
+  timestep: 0.002   # [s] as the training envs (sim_dt 0.002)
+  decimation:
+    control: 2      # 250 Hz robot topics and /clock, as crisp's broadcasters
+    admittance: 2
+
+attach:
+  - file: peg_box_8mm.xml       # rigid in the hand, tip 35 mm beyond the TCP
+    site: fr3_hand_tcp
+  - file: hole_box_9mm.xml      # body origin = centre of the opening (top face)
+    pos: [0.6, 0.0, 0.06]
+    quat: [1, 0, 0, 0]
+
+arms:
+  left:
+    start_body:           base
+    ee_site:              fr3_hand_tcp
+    wrench_force_sensor:  ft_force
+    wrench_torque_sensor: ft_torque
+    q_home: [0.0, -0.78539816, 0.0, -2.35619449, 0.0, 1.57079633, 0.78539816]

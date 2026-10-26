@@ -1,0 +1,79 @@
+<mujoco>
+    <compiler angle="radian"/>
+    <option timestep="0.001" integrator="Euler" solver="Newton" impratio="10" tolerance="1e-8"/>
+    <size njmax="3000" nconmax="1000"/>
+    
+    <asset>
+        <mesh name="door" file="meshes/front_door_A6/front_door_A6_v4.stl" scale="0.001 0.001 0.001"/>
+        <texture name="grid" builtin="checker" height="500" rgb1=".1 .2 .3" rgb2=".2 .3 .4" type="2d" width="500"/>
+        <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2"/>
+        <texture name="skybox" type="skybox" builtin="gradient" rgb1=".1 .2 .3" rgb2="0 0 0" width="800" height="800" mark="random" markrgb="1 1 1"/>
+        <material name="blue" specular="1" shininess="0.5" reflectance="1" emission="0" rgba="0.678 0.847 0.902 1"/>
+    </asset>
+
+    <visual>
+        <global offwidth="612" offheight="512"/>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <quality shadowsize="2048"/>
+        <map stiffness="700" shadowscale="0.5" fogstart="10" fogend="15" zfar="40" haze="0.3"/>
+    </visual>
+
+    <include file="CyRo.xml"/>
+
+    <extension>  
+        <plugin plugin="mujoco.elasticity.cable"/>  
+    </extension>
+
+    <worldbody>
+
+    <body name="xyz_frame" pos="0.405 0 1.11">
+
+      <!-- Origin -->
+      <geom type="sphere" size="0.03" rgba="1 1 1 1"/>
+
+      <!-- X axis (red) -->
+      <geom type="cylinder"
+            fromto="0 0 0   0.3 0 0"
+            size="0.01"
+            rgba="1 0 0 1"/>
+
+      <!-- Y axis (green) -->
+      <geom type="cylinder"
+            fromto="0 0 0   0 0.3 0"
+            size="0.01"
+            rgba="0 1 0 1"/>
+
+      <!-- Z axis (blue) -->
+      <geom type="cylinder"
+            fromto="0 0 0   0 0 0.3"
+            size="0.01"
+            rgba="0 0 1 1"/>
+
+    </body>
+        <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" castshadow="false"/>
+        <geom name="ground" type="plane" size="0 0 1" pos="0 0 0" quat="1 0 0 0" material="grid" condim="1"/>
+
+        <camera pos="2 0 1" xyaxes="0 1 0 -0.65 0 1"/>
+
+        <body name="door" pos="1. 0 0.1" euler="0 0 -2.617">
+            <inertial pos="0 0 0" quat="0.707 -0.707 0 0" mass="27.75" diaginertia="0.666 0.639 1.057"/>
+            <geom name="door" type="mesh" mesh="door" pos="0 0 0" conaffinity="1" contype="1" solref="0.02 1"/>
+                
+                     <geom name="target_red" type="sphere" size="0.05" rgba=".9 0 0 .5" pos="0.2 0.3 0.9" />
+                
+                <composite prefix="cable" type="cable" curve="s" size="1" 
+                    count="51" offset="0.2 0.3 0.9" initial="none" >  
+                    <plugin plugin="mujoco.elasticity.cable">
+                        <config key="twist" value="1e7"/>  
+                        <config key="bend" value="4e6"/>  
+                        <config key="vmax" value="0.05"/>  
+                    </plugin>
+                    <joint kind="main" damping=".15"/>  
+                    <geom type="capsule" size=".005" rgba=".8 .2 .1 1" condim="1"/>  
+                </composite>
+        </body>
+
+        
+    </worldbody>
+</mujoco>

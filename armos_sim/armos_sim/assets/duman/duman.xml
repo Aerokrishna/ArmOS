@@ -1,0 +1,357 @@
+<mujoco model="duman_arm">
+    <compiler angle="radian" />
+    <option timestep="0.0005" integrator="implicitfast" />
+    <asset>
+        <mesh name="tube_50cm___copy" content_type="model/stl" file="meshes/tube_50cm___copy.stl" />
+        <mesh name="tube_50cm" content_type="model/stl" file="meshes/tube_50cm.stl" />
+        <mesh name="motor_encoder_bracket2" content_type="model/stl" file="meshes/motor_encoder_bracket2.stl" />
+        <mesh name="actuator_cover" content_type="model/stl" file="meshes/actuator_cover.stl" />
+        <mesh name="motor_encoder_bracket_bottom" content_type="model/stl" file="meshes/motor_encoder_bracket_bottom.stl" />
+        <mesh name="megamotor" content_type="model/stl" file="meshes/megamotor.stl" />
+        <mesh name="antislipcoup" content_type="model/stl" file="meshes/antislipcoup.stl" />
+        <mesh name="actuator_cover_front" content_type="model/stl" file="meshes/actuator_cover_front.stl" />
+        <mesh name="link" content_type="model/stl" file="meshes/link.stl" />
+        <mesh name="elbow_attacher" content_type="model/stl" file="meshes/elbow_attacher.stl" />
+        <mesh name="antislipcoup_elbow" content_type="model/stl" file="meshes/antislipcoup_elbow.stl" />
+        <mesh name="small_motor" content_type="model/stl" file="meshes/small_motor.stl" />
+        <mesh name="actuator_cover_front_elbow" content_type="model/stl" file="meshes/actuator_cover_front_elbow.stl" />
+        <mesh name="motor_enc_bottom_elbow" content_type="model/stl" file="meshes/motor_enc_bottom_elbow.stl" />
+        <mesh name="motor_encoder_bracket2_elb" content_type="model/stl" file="meshes/motor_encoder_bracket2_elb.stl" />
+        <mesh name="actuator_cover_elbow" content_type="model/stl" file="meshes/actuator_cover_elbow.stl" />
+        <mesh name="link_elbow" content_type="model/stl" file="meshes/link_elbow.stl" />
+        <mesh name="mg995_step_1" content_type="model/stl" file="meshes/mg995_step_1.stl" />
+        <mesh name="wrap1_1" content_type="model/stl" file="meshes/wrap1_1.stl" />
+        <mesh name="wrist_attacher" content_type="model/stl" file="meshes/wrist_attacher.stl" />
+        <mesh name="wrist_attacher2" content_type="model/stl" file="meshes/wrist_attacher2.stl" />
+        <mesh name="wrist_attacher3" content_type="model/stl" file="meshes/wrist_attacher3.stl" />
+        <mesh name="grippers_dh_robotics_ag145_base_link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/grippers_dh_robotics_ag145_base_link.stl" />
+        <mesh name="crank_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/crank_Link.stl" />
+        <mesh name="rod_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/rod_Link.stl" />
+        <mesh name="proximal_phalanx_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/proximal_phalanx_Link.stl" />
+        <mesh name="distal_phalanx_Link" content_type="model/stl" file="meshes/grippers/dh_robotics_ag145/distal_phalanx_Link.stl" />
+        </asset>
+    <worldbody>
+        <body name="base">
+            <body name="camera_link" pos="0.04 0.05 0.695" quat="0.000354096 -0.000713269 -0.895698 0.444661" />
+            <body name="skeleton" pos="-0.115 0.49 0.5" quat="0.707388 0.706825 0 0">
+                <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                <geom pos="0.0111583 0.463624 0.465599" quat="0.709748 0.00641936 0.00142724 -0.704425" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.0111583 0.463624 0.465599" quat="0.709748 0.00641936 0.00142724 -0.704425" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.00392572 -0.0214228 0.235133" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.00392572 -0.0214228 0.235133" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.0127373 0.466127 0.240618" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.0127373 0.466127 0.240618" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.223735 0.465354 0.454609" quat="0.711008 -0.703165 -0.00515678 0.000164636" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.223735 0.465354 0.454609" quat="0.711008 -0.703165 -0.00515678 0.000164636" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.00234667 -0.0239255 0.460114" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.00234667 -0.0239255 0.460114" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.227335 -0.0222411 0.461711" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.227335 -0.0222411 0.461711" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.000150258 0.465894 0.253029" quat="0.497328 0.506407 -0.497095 -0.499113" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.000150258 0.465894 0.253029" quat="0.497328 0.506407 -0.497095 -0.499113" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm___copy" />
+                <geom pos="0.228914 -0.0197384 0.236731" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.228914 -0.0197384 0.236731" quat="0.999971 0.00554839 -0.00352997 0.00376281" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="tube_50cm" />
+                <geom pos="0.252262 0.549485 0.432743" quat="-0.00142699 0.704426 0.709747 0.0064196" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                <geom pos="0.252262 0.549485 0.432743" quat="-0.00142699 0.704426 0.709747 0.0064196" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                <geom pos="0.192265 0.549036 0.432317" quat="-0.00142699 0.704426 0.709747 0.0064196" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                <geom pos="0.192265 0.549036 0.432317" quat="-0.00142699 0.704426 0.709747 0.0064196" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                <geom pos="0.220764 0.483086 0.431784" quat="0.00658409 -0.70459 0.0012649 -0.709583" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                <geom pos="0.220764 0.483086 0.431784" quat="0.00658409 -0.70459 0.0012649 -0.709583" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                <geom pos="0.189364 0.535901 0.432151" quat="0.500858 0.502645 0.502877 -0.493564" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                <geom pos="0.189364 0.535901 0.432151" quat="0.500858 0.502645 0.502877 -0.493564" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                <geom pos="0.252361 0.536373 0.432598" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                <geom pos="0.252361 0.536373 0.432598" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                <geom pos="0.273261 0.549642 0.432892" quat="0.502644 -0.500859 0.493562 0.502878" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                <geom pos="0.273261 0.549642 0.432892" quat="0.502644 -0.500859 0.493562 0.502878" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                <geom pos="-0.0307233 0.547366 0.430733" quat="0.704426 0.00142723 -0.00641936 0.709747" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                <geom pos="-0.0307233 0.547366 0.430733" quat="0.704426 0.00142723 -0.00641936 0.709747" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                <geom pos="0.0292735 0.547816 0.43116" quat="0.704426 0.00142723 -0.00641936 0.709747" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                <geom pos="0.0292735 0.547816 0.43116" quat="0.704426 0.00142723 -0.00641936 0.709747" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                <geom pos="0.00177554 0.481446 0.430228" quat="0.00126325 -0.709583 -0.00658576 0.70459" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                <geom pos="0.00177554 0.481446 0.430228" quat="0.00126325 -0.709583 -0.00658576 0.70459" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                <geom pos="0.0323726 0.534726 0.431036" quat="-0.493565 -0.502875 0.502647 -0.500856" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                <geom pos="0.0323726 0.534726 0.431036" quat="-0.493565 -0.502875 0.502647 -0.500856" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                <geom pos="-0.0306241 0.534254 0.430588" quat="0.502644 -0.500859 0.493562 0.502878" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                <geom pos="-0.0306241 0.534254 0.430588" quat="0.502644 -0.500859 0.493562 0.502878" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                <geom pos="-0.0517222 0.547209 0.430584" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                <geom pos="-0.0517222 0.547209 0.430584" quat="0.502876 -0.493564 -0.500857 -0.502645" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                <body name="actuator" pos="-0.0974027 0.534054 0.430398" quat="0.506408 -0.497327 0.499112 -0.497096">
+                    <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                    <joint name="right_hip" pos="0 0 0" axis="0 0 1" range="-1.57 0.78" actuatorfrcrange="-500 500" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                    <geom pos="1.05013e-06 0.0292626 -0.0711655" quat="9.38184e-07 0.707105 9.38187e-07 -0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                    <geom pos="1.05013e-06 0.0292626 -0.0711655" quat="9.38184e-07 0.707105 9.38187e-07 -0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                    <geom pos="1.05013e-06 0.00126256 -0.005" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                    <geom pos="1.05013e-06 0.00126256 -0.005" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                    <geom pos="1.05013e-06 0.0322626 -0.0580524" quat="1.32679e-06 0 0 -1" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                    <geom pos="1.05013e-06 0.0322626 -0.0580524" quat="1.32679e-06 0 0 -1" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0580524" quat="1.32679e-06 -1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0580524" quat="1.32679e-06 -1 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                    <geom pos="1.05013e-06 -0.0517374 -0.0711655" quat="1.76073e-12 1.32679e-06 -1 -1.32679e-06" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                    <geom pos="1.05013e-06 -0.0517374 -0.0711655" quat="1.76073e-12 1.32679e-06 -1 -1.32679e-06" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                    <body name="elbow_attacher" pos="1.05013e-06 -0.0670174 -0.0580524" quat="0.707105 -0.707108 0 0">
+                        <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                        <joint name="right_shoulder" pos="0 0 0" axis="0 0 1" range="-0.1 1.57" actuatorfrcrange="-500 500" />
+                        <geom pos="0.215 -0.03 -0.005" quat="0.707105 0 0 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="link" />
+                        <geom pos="0.215 -0.03 -0.005" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="link" />
+                        <geom pos="0.271177 0 -0.040137" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="0.271177 0 -0.040137" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="0 0 -0.005" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="0 0 -0.005" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="0.271177 0 -0.005857" quat="0.499998 -0.5 0.500002 -0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup_elbow" />
+                        <geom pos="0.271177 0 -0.005857" quat="0.499998 -0.5 0.500002 -0.5" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup_elbow" />
+                        <geom pos="0.271177 0 0.116893" quat="0.707105 -0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="small_motor" />
+                        <geom pos="0.271177 0 0.116893" quat="0.707105 -0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="small_motor" />
+                        <geom pos="0.286127 0.0015 -0.026886" quat="0.654547 0.654663 0.267522 0.267239" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front_elbow" />
+                        <geom pos="0.286127 0.0015 -0.026886" quat="0.654547 0.654663 0.267522 0.267239" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front_elbow" />
+                        <geom pos="0.215 0 -0.005" quat="0.707105 0 0 -0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_enc_bottom_elbow" />
+                        <geom pos="0.215 0 -0.005" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_enc_bottom_elbow" />
+                        <geom pos="0.286165 0 -0.005857" quat="0.707105 -0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2_elb" />
+                        <geom pos="0.286165 0 -0.005857" quat="0.707105 -0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2_elb" />
+                        <geom pos="0.286162 0.0015 0.054114" quat="0.653224 -0.653339 0.270739 -0.270457" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_elbow" />
+                        <geom pos="0.286162 0.0015 0.054114" quat="0.653224 -0.653339 0.270739 -0.270457" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_elbow" />
+                        <body name="link_elbow" pos="0.281177 0 -0.040137" quat="1 0 0 0">
+                            <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                            <joint name="right_elbow" pos="0 0 0" axis="0 0 1" range="-2.36 1.57" actuatorfrcrange="-500 500" />
+                            <geom pos="0.125 0.03 -0.03" quat="9.38184e-07 0.707105 -0.707108 -9.38187e-07" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="link_elbow" />
+                            <geom pos="0.125 0.03 -0.03" quat="9.38184e-07 0.707105 -0.707108 -9.38187e-07" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="link_elbow" />
+                            <geom pos="0.127 0.00025 -0.015" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                            <geom pos="0.127 0.00025 -0.015" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                            <geom pos="0.170404 0.001 -0.00509603" quat="0.499891 -0.500107 0.500109 -0.499892" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                            <geom pos="0.170404 0.001 -0.00509603" quat="0.499891 -0.500107 0.500109 -0.499892" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                            <geom pos="0.161 0.03 -0.045" quat="9.38184e-07 0.707105 -0.707108 -9.38187e-07" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher" />
+                            <geom pos="0.161 0.03 -0.045" quat="9.38184e-07 0.707105 -0.707108 -9.38187e-07" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher" />
+                            <body name="wrist_attacher2_assem" pos="0.1741 0.000159276 -0.00509072" quat="0.707105 0 -0.707108 0">
+                                <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                <joint name="right_wrist1" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                <geom pos="-0.0394664 -0.00915928 -0.0219368" quat="0.500106 0.499892 -0.499894 -0.500107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                <geom pos="-0.0394664 -0.00915928 -0.0219368" quat="0.500106 0.499892 -0.499894 -0.500107" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                <geom pos="0 0 -0.002" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher2" />
+                                <geom pos="0 0 -0.002" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher2" />
+                                <geom pos="0.004 0 -0.0215" quat="0.499998 0.5 -0.500002 -0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                <geom pos="0.004 0 -0.0215" quat="0.499998 0.5 -0.500002 -0.5" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                <body name="wrist_attacher3_assem" pos="-0.0431 -0.00990928 -0.0214093" quat="0.707105 0 0.707108 0">
+                                    <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                    <joint name="right_wrist2" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                    <geom pos="0.08 0 0.0386" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher3" />
+                                    <geom pos="0.08 0 0.0386" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher3" />
+                                    <geom pos="0.051 0 0.0406" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                    <geom pos="0.051 0 0.0406" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                    <body name="wrap1_1" pos="0.0955 0 0.0506" quat="0.707105 0 0.707108 0">
+                                        <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                        <joint name="right_wrist3" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                        <geom pos="0 0 0.00105" quat="1.32679e-06 1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                        <geom pos="0 0 0.00105" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                        <body name="ee_right" pos="0 0 0.0">
+                                            <site name="ee_right" pos="0 0 0" />
+                                            <site name="ee_frame_right" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                            <body name="right_robot_gripper_base_link">
+                                                <inertial pos="4.22096e-09 -8.66338e-05 0.00351546" quat="-0.000251376 0.707107 -0.000251376 0.707107" mass="0.0244063" diaginertia="2.02963e-05 1.55299e-05 5.1709e-06" />
+                                                <geom type="mesh" contype="1" conaffinity="1" mesh="grippers_dh_robotics_ag145_base_link" />
+                                                <body name="right_robot_gripper_finger1_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                    <inertial pos="0.019413 1.0484e-09 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                    <joint name="right_robot_gripper_finger1_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" damping="2.0" armature="0.01" frictionloss="0.02" actuatorfrcrange="-8 8" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                    <body name="right_robot_gripper_finger1_finger_link" pos="0.036999 0 -0.00019698">
+                                                        <inertial pos="-0.012522 -9.1789e-09 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                        </body>
+                                                    </body>
+                                                <body name="right_robot_gripper_finger2_knuckle_link" pos="0.016 0 0.10586">
+                                                    <inertial pos="0.019413 0.00025 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                    <joint name="right_robot_gripper_finger2_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" damping="2.0" armature="0.01" frictionloss="0.02" actuatorfrcrange="-8 8" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                    <body name="right_robot_gripper_finger2_finger_link" pos="0.036999 0 -0.00019698">
+                                                        <inertial pos="-0.012522 -0.00025001 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                        </body>
+                                                    </body>
+                                                <body name="right_robot_gripper_finger1_inner_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                    <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                    <joint name="right_robot_gripper_finger1_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-1.57 1.57" damping="1.0" armature="0.005" frictionloss="0.01" actuatorfrcrange="-20 20" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                    <body name="right_robot_gripper_finger1_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                        <inertial pos="0.0019731 -1.4867e-09 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                        <joint name="right_robot_gripper_finger1_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-1.57 1.57" damping="0.5" armature="0.002" frictionloss="0.005" actuatorfrcrange="-2 2" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                        </body>
+                                                    </body>
+                                                <body name="right_robot_gripper_finger2_inner_knuckle_link" pos="0.016 0 0.10586">
+                                                    <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                    <joint name="right_robot_gripper_finger2_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-1.57 1.57" damping="1.0" armature="0.005" frictionloss="0.01" actuatorfrcrange="-20 20" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                    <body name="right_robot_gripper_finger2_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                        <inertial pos="0.0019731 3.1569e-10 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                        <joint name="right_robot_gripper_finger2_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-1.57 1.57" damping="0.5" armature="0.002" frictionloss="0.005" actuatorfrcrange="-2 2" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                        </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                <body name="actuator_2" pos="0.32 0.536574 0.432788" quat="0.499113 -0.497096 -0.506406 0.497327">
+                    <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                    <joint name="left_hip" pos="0 0 0" axis="0 0 1" range="-0.78 1.57" actuatorfrcrange="-500 500" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2" />
+                    <geom pos="1.05013e-06 0.0292626 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                    <geom pos="1.05013e-06 0.0292626 -0.0711655" quat="9.38184e-07 -0.707105 9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover" />
+                    <geom pos="1.05013e-06 0.00126256 -0.005" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                    <geom pos="1.05013e-06 0.00126256 -0.005" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket_bottom" />
+                    <geom pos="1.05013e-06 0.0322626 -0.0580524" quat="1.32679e-06 0 0 1" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                    <geom pos="1.05013e-06 0.0322626 -0.0580524" quat="1.32679e-06 0 0 1" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="megamotor" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0580524" quat="1.32679e-06 1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                    <geom pos="1.05013e-06 -0.0307374 -0.0580524" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup" />
+                    <geom pos="1.05013e-06 -0.0517374 -0.0711655" quat="1.75981e-12 -1.32679e-06 -1 1.32679e-06" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                    <geom pos="1.05013e-06 -0.0517374 -0.0711655" quat="1.75981e-12 -1.32679e-06 -1 1.32679e-06" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front" />
+                    <body name="elbow_attacher_2" pos="1.05013e-06 -0.0670174 -0.0580524" quat="0.707105 -0.707108 0 0">
+                        <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                        <joint name="left_shoulder" pos="0 0 0" axis="0 0 1" range="-1.57 0.1" actuatorfrcrange="-500 500" />
+                        <geom pos="-0.215 0.03 -0.005" quat="0.707105 0 0 -0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="link" />
+                        <geom pos="-0.215 0.03 -0.005" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="link" />
+                        <geom quat="9.38184e-07 -9.38187e-07 -0.707108 0.707105" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom quat="9.38184e-07 -9.38187e-07 -0.707108 0.707105" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="-0.271178 0.0015 -0.0400426" quat="0.0504877 0.0504879 -0.705303 -0.705301" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="-0.271178 0.0015 -0.0400426" quat="0.0504877 0.0504879 -0.705303 -0.705301" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="elbow_attacher" />
+                        <geom pos="-0.271178 0.0015 -0.00576256" quat="0.463022 -0.463024 -0.534425 0.534423" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup_elbow" />
+                        <geom pos="-0.271178 0.0015 -0.00576256" quat="0.463022 -0.463024 -0.534425 0.534423" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="antislipcoup_elbow" />
+                        <geom pos="-0.271178 0.0015 0.116987" quat="0.169905 -0.169905 0.686392 -0.68639" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="small_motor" />
+                        <geom pos="-0.271178 0.0015 0.116987" quat="0.169905 -0.169905 0.686392 -0.68639" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="small_motor" />
+                        <geom pos="-0.286167 0.0015 -0.0267626" quat="0.267382 0.267383 -0.654606 -0.654603" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front_elbow" />
+                        <geom pos="-0.286167 0.0015 -0.0267626" quat="0.267382 0.267383 -0.654606 -0.654603" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_front_elbow" />
+                        <geom pos="-0.215 0 -0.005" quat="0.707105 0 0 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_enc_bottom_elbow" />
+                        <geom pos="-0.215 0 -0.005" quat="0.707105 0 0 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_enc_bottom_elbow" />
+                        <geom pos="-0.286167 0.0015 -0.00576256" quat="9.38184e-07 -9.38187e-07 0.707108 -0.707105" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2_elb" />
+                        <geom pos="-0.286167 0.0015 -0.00576256" quat="9.38184e-07 -9.38187e-07 0.707108 -0.707105" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="motor_encoder_bracket2_elb" />
+                        <geom pos="-0.286167 0.0015 0.0542374" quat="0.270599 -0.2706 -0.653282 0.65328" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_elbow" />
+                        <geom pos="-0.286167 0.0015 0.0542374" quat="0.270599 -0.2706 -0.653282 0.65328" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="actuator_cover_elbow" />
+                        <body name="link_elbow_2" pos="-0.281178 0.0015 -0.0400426" quat="0.0714005 0 0 -0.997448">
+                            <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                            <joint name="left_elbow" pos="0 0 0" axis="0 0 1" range="-1.57 2.36" actuatorfrcrange="-500 500" />
+                            <geom pos="0.127999 0.0118891 -0.03" quat="8.68804e-07 -0.654814 0.75579 -1.00278e-06" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="link_elbow" />
+                            <geom pos="0.127999 0.0118891 -0.03" quat="8.68804e-07 -0.654814 0.75579 -1.00278e-06" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="link_elbow" />
+                            <geom pos="0.125776 -0.017595 -0.015" quat="0.0504877 0.705301 -0.0504879 0.705303" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                            <geom pos="0.125776 -0.017595 -0.015" quat="0.0504877 0.705301 -0.0504879 0.705303" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                            <geom pos="0.168783 -0.023784 -0.005" quat="0.463022 -0.463024 0.534425 -0.534423" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                            <geom pos="0.168783 -0.023784 -0.005" quat="0.463022 -0.463024 0.534425 -0.534423" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                            <geom pos="0.163774 0.00775109 -0.045" quat="8.68804e-07 -0.654814 0.75579 -1.00278e-06" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher" />
+                            <geom pos="0.163774 0.00775109 -0.045" quat="8.68804e-07 -0.654814 0.75579 -1.00278e-06" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher" />
+                            <body name="wrist_attacher2_assem_left" pos="0.172383 -0.0243937 -0.00509072" quat="0.705301 -0.0504889 -0.705303 -0.0504891">
+                                <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                <joint name="left_wrist1" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                <geom pos="0 0 -0.002" quat="0.707105 0.707108 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher2" />
+                                <geom pos="0 0 -0.002" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher2" />
+                                <geom pos="0.004 0 -0.0215" quat="0.499998 -0.5 -0.500002 0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                <geom pos="0.004 0 -0.0215" quat="0.499998 -0.5 -0.500002 0.5" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                <geom pos="-0.0393593 0.0100907 -0.022" quat="0.499998 0.5 -0.500002 -0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                <geom pos="-0.0393593 0.0100907 -0.022" quat="0.499998 0.5 -0.500002 -0.5" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                <body name="wrist_attacher3_assem_2" pos="-0.0431 0.00990928 -0.0215907" quat="0.707105 0 0.707108 0">
+                                    <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                    <joint name="left_wrist2" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                    <geom pos="0.08 0 0.0386" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher3" />
+                                    <geom pos="0.08 0 0.0386" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="wrist_attacher3" />
+                                    <geom pos="0.051 0 0.0366" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                    <geom pos="0.051 0 0.0366" quat="9.38184e-07 0.707105 -9.38187e-07 0.707108" type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="mg995_step_1" />
+                                    <body name="wrap1_1_2" pos="0.0955 -9.07239e-05 0.0465093" quat="0.707105 0 0.707108 0">
+                                        <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01" />
+                                        <joint name="left_wrist3" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-500 500" />
+                                        <geom pos="0 0 0.00105" quat="1.32679e-06 -1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                        <geom pos="0 0 0.00105" quat="1.32679e-06 -1 0 0" type="mesh" rgba="0.901961 0.917647 0.929412 1" mesh="wrap1_1" />
+                                        <body name="ee_left" pos="0 0 0.0">
+                                            <site name="ee_left" pos="0 0 0" />
+                                            <site name="ee_frame_left" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+                                            <body name="left_robot_gripper_base_link">
+                                                <inertial pos="4.22096e-09 -8.66338e-05 0.00351546" quat="-0.000251376 0.707107 -0.000251376 0.707107" mass="0.0244063" diaginertia="2.02963e-05 1.55299e-05 5.1709e-06" />
+                                                <geom type="mesh" contype="1" conaffinity="1" mesh="grippers_dh_robotics_ag145_base_link" />
+                                                <body name="left_robot_gripper_finger1_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                    <inertial pos="0.019413 1.0484e-09 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                    <joint name="left_robot_gripper_finger1_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" damping="2.0" armature="0.01" frictionloss="0.02" actuatorfrcrange="-8 8" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                    <body name="left_robot_gripper_finger1_finger_link" pos="0.036999 0 -0.00019698">
+                                                        <inertial pos="-0.012522 -9.1789e-09 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                        </body>
+                                                    </body>
+                                                <body name="left_robot_gripper_finger2_knuckle_link" pos="0.016 0 0.10586">
+                                                    <inertial pos="0.019413 0.00025 -0.0013793" quat="0.502203 0.502203 -0.497787 0.497787" mass="0.0039541" diaginertia="1.76675e-06 1.15335e-06 6.8389e-07" />
+                                                    <joint name="left_robot_gripper_finger2_joint" pos="0 0 0" axis="0 -1 0" range="-0.65 0" damping="2.0" armature="0.01" frictionloss="0.02" actuatorfrcrange="-8 8" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="crank_Link" />
+                                                    <body name="left_robot_gripper_finger2_finger_link" pos="0.036999 0 -0.00019698">
+                                                        <inertial pos="-0.012522 -0.00025001 0.034743" quat="0.980255 0 -0.197738 0" mass="0.01141" diaginertia="8.86368e-06 7.7164e-06 1.30222e-06" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="rod_Link" />
+                                                        </body>
+                                                    </body>
+                                                <body name="left_robot_gripper_finger1_inner_knuckle_link" pos="-0.016 0 0.10586" quat="0 0 0 1">
+                                                    <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                    <joint name="left_robot_gripper_finger1_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-1.57 1.57" damping="1.0" armature="0.005" frictionloss="0.01" actuatorfrcrange="-20 20" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                    <body name="left_robot_gripper_finger1_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                        <inertial pos="0.0019731 -1.4867e-09 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                        <joint name="left_robot_gripper_finger1_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-1.57 1.57" damping="0.5" armature="0.002" frictionloss="0.005" actuatorfrcrange="-2 2" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                        </body>
+                                                    </body>
+                                                <body name="left_robot_gripper_finger2_inner_knuckle_link" pos="0.016 0 0.10586">
+                                                    <inertial pos="-0.0051218 -8.3333e-10 0.038185" quat="0.99856 0 -0.0536474 0" mass="0.017156" diaginertia="1.55677e-05 1.2149e-05 3.65768e-06" />
+                                                    <joint name="left_robot_gripper_finger2_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-1.57 1.57" damping="1.0" armature="0.005" frictionloss="0.01" actuatorfrcrange="-20 20" />
+                                                    <geom type="mesh" contype="1" conaffinity="1" mesh="proximal_phalanx_Link" />
+                                                    <body name="left_robot_gripper_finger2_finger_tip_link" pos="-0.0081054 0 0.086119">
+                                                        <inertial pos="0.0019731 3.1569e-10 0.010631" quat="0.978203 0 -0.20765 0" mass="0.012397" diaginertia="1.15681e-06 1.0269e-06 7.81093e-07" />
+                                                        <joint name="left_robot_gripper_finger2_finger_tip_joint" pos="0 0 0" axis="0 1 0" range="-1.57 1.57" damping="0.5" armature="0.002" frictionloss="0.005" actuatorfrcrange="-2 2" />
+                                                        <geom type="mesh" contype="1" conaffinity="1" mesh="distal_phalanx_Link" friction="1 0.5 0.01" solimp="0.99 0.99 0.01" solref="0.01 1" />
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                        </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </worldbody>
+
+    <equality>
+    <joint joint1="right_robot_gripper_finger1_joint" joint2="right_robot_gripper_finger2_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="left_robot_gripper_finger1_joint" joint2="left_robot_gripper_finger2_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    </equality>
+
+    <actuator>
+    <position name="right_hip_position" joint="right_hip"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 0.78" forcerange="-500 500" />
+    <position name="right_shoulder_position" joint="right_shoulder"
+              kp="2500.0" kv="150.0" ctrlrange="-0.1 1.57" forcerange="-500 500" />
+    <position name="right_elbow_position" joint="right_elbow"
+              kp="2500.0" kv="150.0" ctrlrange="-2.36 1.57" forcerange="-500 500" />
+    <position name="right_wrist1_position" joint="right_wrist1"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+    <position name="right_wrist2_position" joint="right_wrist2"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+    <position name="right_wrist3_position" joint="right_wrist3"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+
+    <position name="left_hip_position" joint="left_hip"
+              kp="2500.0" kv="150.0" ctrlrange="-0.78 1.57" forcerange="-500 500" />
+    <position name="left_shoulder_position" joint="left_shoulder"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 0.1" forcerange="-500 500" />
+    <position name="left_elbow_position" joint="left_elbow"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 2.36" forcerange="-500 500" />
+    <position name="left_wrist1_position" joint="left_wrist1"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+    <position name="left_wrist2_position" joint="left_wrist2"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+    <position name="left_wrist3_position" joint="left_wrist3"
+              kp="2500.0" kv="150.0" ctrlrange="-1.57 1.57" forcerange="-500 500" />
+    <position name="left_robot_gripper_finger1_joint_motor" joint="left_robot_gripper_finger1_joint" kp="40" kv="6" ctrlrange="-0.65 0" forcerange="-8 8" />
+
+    <position name="right_robot_gripper_finger1_joint_motor" joint="right_robot_gripper_finger1_joint" kp="40" kv="6" ctrlrange="-0.65 0" forcerange="-8 8" />
+</actuator>
+    </mujoco>

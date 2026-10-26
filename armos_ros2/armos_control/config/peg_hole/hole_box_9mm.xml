@@ -1,0 +1,30 @@
+<mujoco model="hole_box_9mm">
+  <!-- Square socket for the 8 mm peg: mujoco_rl_bed's RectHole as used by forge_peg_cuboid and
+       compliant_peg_s3* (9 x 9 mm opening = 0.5 mm clearance per side, 25 mm deep, 60 x 60 mm block, 5 mm
+       base). The body origin is the centre of the opening (top face): that is the `hole_pos` the policy node
+       takes. Opening axes along the body x / y (aligned with the TCP x / y at the home pose for yaw 0).
+       Collision bit 2 only (the peg), as in training. The column below is visual only. -->
+  <worldbody>
+    <body name="hole">
+      <geom name="hole_base" type="box" size="0.03 0.03 0.0025" pos="0 0 -0.0275" friction="0.75 0.005 0.0001"
+            solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2" conaffinity="2" condim="3"
+            rgba="0.6 0.6 0.65 1"/>
+      <geom name="hole_block0" type="box" size="0.01275 0.03 0.0125" pos="0.01725 0 -0.0125"
+            friction="0.75 0.005 0.0001" solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2"
+            conaffinity="2" condim="3" rgba="0.6 0.6 0.65 1"/>
+      <geom name="hole_block1" type="box" size="0.01275 0.03 0.0125" pos="-0.01725 0 -0.0125"
+            friction="0.75 0.005 0.0001" solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2"
+            conaffinity="2" condim="3" rgba="0.6 0.6 0.65 1"/>
+      <geom name="hole_block2" type="box" size="0.0045 0.01275 0.0125" pos="0 0.01725 -0.0125"
+            friction="0.75 0.005 0.0001" solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2"
+            conaffinity="2" condim="3" rgba="0.6 0.6 0.65 1"/>
+      <geom name="hole_block3" type="box" size="0.0045 0.01275 0.0125" pos="0 -0.01725 -0.0125"
+            friction="0.75 0.005 0.0001" solref="0.004 1" solimp="0.95 0.99 0.0005 0.5 2" contype="2"
+            conaffinity="2" condim="3" rgba="0.6 0.6 0.65 1"/>
+      <geom name="hole_column" type="box" size="0.02 0.02 0.15" pos="0 0 -0.18" contype="0" conaffinity="0"
+            rgba="0.35 0.35 0.4 1"/>
+      <site name="hole_tip" pos="0 0 0" size="0.0015" rgba="0 1 0 1" group="4"/>
+      <site name="hole_floor" pos="0 0 -0.025" size="0.0015" rgba="0 0 1 1" group="4"/>
+    </body>
+  </worldbody>
+</mujoco>
